@@ -1,0 +1,19 @@
+{
+  "name": "typetasks",
+  "version": "1.0.0",
+  "description": "TypeTasks - A type-safe task tracker data model",
+  "main": "model.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "typetasks",
+    "typesafe"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
