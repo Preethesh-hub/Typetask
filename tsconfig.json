@@ -10,5 +10,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["model.ts"]
+  "include": ["model.ts", "app.ts"]
 }
