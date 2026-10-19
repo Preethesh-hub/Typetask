@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TypeTasks — Type-Safe Task Tracker</title>
+  <meta name="description" content="A modern, high-precision type-safe task tracker powered by TypeScript and static data models." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Header with Branding & Model Safety Badge -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="brand-title">TypeTasks</h1>
+            <p class="brand-subtitle">Type-Safe Workflow Studio</p>
+          </div>
+        </div>
+        <div class="safety-badge" title="Zero type errors, strictly verified by TypeScript model">
+          <span class="status-pulse"></span>
+          <code>strict: true</code>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Dashboard -->
+      <div class="metrics-grid">
+        <div class="metric-card total">
+          <span class="metric-label">Total Tasks</span>
+          <span id="metric-total" class="metric-val">0</span>
+        </div>
+        <div class="metric-card todo">
+          <span class="metric-label">To Do</span>
+          <span id="metric-todo" class="metric-val">0</span>
+        </div>
+        <div class="metric-card in-progress">
+          <span class="metric-label">In Progress</span>
+          <span id="metric-inprogress" class="metric-val">0</span>
+        </div>
+        <div class="metric-card done">
+          <span class="metric-label">Completed</span>
+          <span id="metric-done" class="metric-val">0</span>
+        </div>
+      </div>
+
+      <!-- Live Summary Text -->
+      <p id="summary" class="summary-line">0 to do &bull; 0 in progress &bull; 0 done</p>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-card">
+      <!-- Task Creation Input Bar -->
+      <section class="creator-section">
+        <label for="title" class="sr-only">New task title</label>
+        <div class="input-group">
+          <div class="input-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <input
+            id="title"
+            type="text"
+            class="task-input"
+            placeholder="What needs to be done? (e.g. Implement TaskStatus union)"
+            autocomplete="off"
+            maxlength="120"
+          />
+          <select id="status" class="status-select" aria-label="Initial task status">
+            <option value="todo">todo</option>
+            <option value="in-progress">in-progress</option>
+            <option value="done">done</option>
+          </select>
+          <button id="add" class="btn-primary" type="button">
+            <span>Add Task</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Filter Controls & Actions -->
+      <section class="controls-bar">
+        <div class="filters-container">
+          <span class="filter-label">Filter:</span>
+          <div id="chips" class="chips-group" role="group" aria-label="Filter tasks by status">
+            <!-- Populated dynamically by app.ts -->
+          </div>
+        </div>
+
+        <button id="clear-done" class="btn-clear" type="button" title="Clear all completed tasks">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          <span>Clear Done</span>
+        </button>
+      </section>
+
+      <!-- Task Items List -->
+      <section class="list-section">
+        <ul id="list" class="task-list" aria-label="Task list">
+          <!-- Populated dynamically by app.ts -->
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>
+        Guaranteed by <code>Task</code> &amp; <code>TaskStatus</code> &bull; Built with HTML, CSS &amp; TypeScript
+      </p>
+    </footer>
+  </div>
+
+  <!-- Load Compiled JavaScript Module -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

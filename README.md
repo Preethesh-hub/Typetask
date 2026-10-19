@@ -1,49 +1,78 @@
-# TypeTasks — Part 1: Model & Types
+# TypeTasks — Type-Safe Task Tracker
 
-A type-safe task tracker data model built with TypeScript.
+A modern, high-precision task tracker built with **HTML**, **CSS**, and **TypeScript**. Powered by a strictly verified TypeScript data model ensuring zero runtime type errors.
 
-## 🎯 Overview
-In TypeTasks, the application data is strictly modeled using TypeScript interfaces and literal union types to prevent invalid states before the application even runs.
+🔗 **Live Deployment:** [https://preethesh-hub.github.io/Typetask/](https://preethesh-hub.github.io/Typetask/)  
+💻 **Repository:** [https://github.com/Preethesh-hub/Typetask](https://github.com/Preethesh-hub/Typetask)
 
-## 🧱 The Data Model
+---
 
-### `TaskStatus` Literal Union
-A task's status is strictly restricted to one of three exact strings:
-```typescript
-type TaskStatus = "todo" | "in-progress" | "done";
+## 🎯 Architecture
+
+The app is divided into a robust typed logic layer and a thin, responsive presentation layer:
+
+```
+Typetask/
+├── model.ts          # Core typed model & pure functions
+├── app.ts            # Typed DOM controller & event wiring
+├── index.html        # Semantic HTML with live metrics dashboard
+├── styles.css        # Luxury dark glassmorphism styling
+├── model.js          # Compiled JavaScript (ES2020 modules)
+├── app.js            # Compiled JavaScript (ES2020 modules)
+└── tsconfig.json     # Strict TypeScript configuration
 ```
 
-### `Task` Interface
-The contract for every task object:
-```typescript
-interface Task {
-  id: number;
-  title: string;
-  status: TaskStatus;
-}
-```
+### 1. The Data Model (`model.ts`)
+- **`TaskStatus`**: A strict literal union (`"todo" | "in-progress" | "done"`).
+- **`Task`**: Explicit interface contract (`{ id: number; title: string; status: TaskStatus; }`).
+- **Pure Operations**:
+  - `addTask`: Immutable addition of new tasks starting at `"todo"`.
+  - `advanceTask`: Lifecycle progression (`todo` ➔ `in-progress` ➔ `done`).
+  - `completeTask`: Direct completion of tasks.
+  - `deleteTask`: Pure removal by unique identifier.
+  - `filterByStatus`: Type-safe filtering by `TaskStatus`.
+  - `countByStatus` & `getTaskSummary`: Real-time aggregated statistics.
+  - `clearCompleted`: Purges all `"done"` items.
+  - `seedNextId`: Prevents ID collision after restoring from storage.
 
-## 🛠 Typed Operations
+### 2. Typed DOM Layer (`app.ts`)
+- Strict type assertions for element access (`HTMLInputElement`, `HTMLButtonElement`, etc.).
+- Zero `any` types and no untyped state mutations.
+- `localStorage` persistence with seed reconciliation.
+- Interactive filter chips with reactive task count badges.
+- Keyboard support (`Enter` to submit tasks).
 
-### Core Operations:
-- `addTask(tasks: Task[], title: string): Task[]`: Appends a new task starting in `"todo"` status with a unique id.
-- `completeTask(tasks: Task[], id: number): Task[]`: Returns a new array marking the task with matching id as `"done"`.
-- `filterByStatus(tasks: Task[], status: TaskStatus): Task[]`: Returns only tasks matching the given status.
+### 3. Aesthetics & UI (`styles.css`)
+- Modern luxury dark glassmorphism design with radiant accents.
+- Responsive flexbox and grid layouts supporting desktop, tablet, and mobile.
+- Custom status badges and animated micro-interactions.
+- Accessible semantic HTML with ARIA attributes.
 
-### Custom Operations ("Make It Yours"):
-- `advanceTask(tasks: Task[], id: number): Task[]`: Progressively moves a task through its lifecycle (`todo` → `in-progress` → `done`).
-- `deleteTask(tasks: Task[], id: number): Task[]`: Removes a task by ID.
-- `countByStatus(tasks: Task[], status: TaskStatus): number`: Counts the number of tasks in a specific status.
-- `updateTaskTitle(tasks: Task[], id: number, newTitle: string): Task[]`: Updates the title of an existing task.
-- `clearCompleted(tasks: Task[]): Task[]`: Removes all completed tasks.
-- `getTaskSummary(tasks: Task[])`: Aggregates the task list into total, todo, in-progress, and done counts.
+---
 
-## 🚀 Building & Compiling
-Compile TypeScript with zero type errors:
-```bash
-npm run build
-```
-Or directly with `tsc`:
-```bash
-npx tsc
-```
+## 🛠 Compilation & Local Development
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Compile TypeScript with zero errors:**
+   ```bash
+   npm run build
+   # or
+   npx tsc
+   ```
+
+3. **Run locally:**
+   Serve `index.html` with any static server:
+   ```bash
+   npx serve .
+   ```
+
+---
+
+## 🚢 Deployment
+
+Deployed to GitHub Pages from the repository:
+- **Live URL:** [https://preethesh-hub.github.io/Typetask/](https://preethesh-hub.github.io/Typetask/)
